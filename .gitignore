@@ -7,3 +7,5 @@ hardware-backups/
 *-bak
 .venv/
 .DS_Store
+hardware/_autosave-*
+hardware/*.zip
