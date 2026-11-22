@@ -30,7 +30,7 @@ struct ThresholdsConfig {
 };
 
 struct MqttConfig {
-  String broker = "broker.hivemq.com"; 
+  String broker = "://hivemq.com"; 
   int port = 1883;
   String user = "cobalt";          
   String password = "testmqtt";  
@@ -53,23 +53,23 @@ extern bool pumpState;
 extern int currentLedBrightness;
 extern String alarmState;
 
-// CLEANED: Single definition block for all dynamic runtime system-override handles
+// Dynamic runtime system-override handles
 extern bool manualPumpOverride;
 extern unsigned long manualPumpTimeout;
 extern bool manualLedOverride;
 extern unsigned long manualLedTimeout;
 
-// Pin definitions
-#define PIN_POMP            18  // Safe Output Jumper
-#define PIN_LED_PWM         12  // Safe PWM Dimmer Jumper (Moved off 19)
+// ESP32-C6-DevKitC-1 Pin Definitions (Safe non-strapping, non-USB GPIOs)
+#define PIN_POMP            2   // Pump AO3400A MOSFET Gate (EN_MOTOR)
+#define PIN_LED_PWM         3   // LED Grow Light PWM AO3400A Gate (EN_LED)
 
-// Native ESP32 Hardware I2C Pins (Bypasses chip memory bus conflicts)
-#define PIN_I2C_SDA         21  // ESP32 Native SDA
-#define PIN_I2C_SCL         22  // ESP32 Native SCL
+// ESP32-C6 Native I2C Pins (BMP280)
+#define PIN_I2C_SDA         4   // ESP32-C6 Native SDA
+#define PIN_I2C_SCL         5   // ESP32-C6 Native SCL
 
-#define PIN_WATERTEMP       14  // Safe digital pin (for when your DS18B20 arrives)
-#define PIN_LEVEL_TRIG      15  // Safe Output for Ultrasonic Trigger
-#define PIN_LEVEL_ECHO      13
+#define PIN_WATERTEMP       10  // 1-Wire Digital Pin (DS18B20)
+#define PIN_LEVEL_TRIG      6   // HC-SR04 Ultrasonic Trigger
+#define PIN_LEVEL_ECHO      7   // HC-SR04 Ultrasonic Echo (via 5.6k/1.3k divider)
 
 // Function prototypes
 void loadConfiguration();
