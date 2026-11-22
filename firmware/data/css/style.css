@@ -1,0 +1,139 @@
+:root {
+    --bg-primary: #121824;
+    --bg-secondary: #1c2333;
+    --accent-green: #10b981;
+    --accent-blue: #3b82f6;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --alert-crimson: #ef4444;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2d3748;
+}
+
+h1, h2 { margin: 0; color: #fff; }
+h2 { font-size: 1.25rem; margin-bottom: 1.25rem; border-left: 4px solid var(--accent-green); padding-left: 0.5rem; }
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.slider-container {
+    width: 250px;
+    margin: 0.75rem 0;
+}
+
+.main-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #334155;
+    outline: none;
+    cursor: pointer;
+}
+
+/* De ronde schuifknop voor Chrome, Safari, Edge, Opera en mobiel */
+.main-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #10b981; /* Fel groen */
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    transition: transform 0.1s ease;
+}
+
+.main-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* De ronde schuifknop voor Firefox */
+.main-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    transition: transform 0.1s ease;
+}
+
+.main-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.metric {
+    background-color: var(--bg-primary);
+    padding: 1.25rem;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid #2d3748;
+}
+
+.metric .label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; }
+.metric .value { font-size: 2rem; font-weight: bold; color: #fff; }
+.metric .unit { color: var(--text-muted); margin-left: 0.25rem; }
+
+.control-row { display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between; }
+.progress-bar { background: var(--bg-primary); width: 250px; height: 16px; border-radius: 8px; overflow: hidden; border: 1px solid #2d3748; margin-top: 0.5rem;}
+.progress { background: linear-gradient(90deg, var(--accent-blue), var(--accent-green)); height: 100%; transition: width 0.4s ease; }
+
+form fieldset { border: 1px solid #2d3748; border-radius: 6px; padding: 1.25rem; margin-bottom: 1.25rem; background-color: var(--bg-primary); }
+form legend { padding: 0 0.5rem; color: var(--accent-green); font-weight: bold; font-size: 0.9rem; }
+.form-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.form-group:last-child { margin-bottom: 0; }
+form label { font-size: 0.95rem; color: var(--text-main); }
+form input { background-color: var(--bg-secondary); border: 1px solid #4a5568; color: #fff; padding: 0.5rem; border-radius: 4px; width: 120px; text-align: center; }
+form input:focus { border-color: var(--accent-green); outline: none; }
+
+.btn { background-color: var(--accent-blue); border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-right: 0.5rem; }
+.btn:hover { background-color: #2563eb; }
+.btn-danger { background-color: var(--alert-crimson); }
+.btn-danger:hover { background-color: #dc2626; }
+.btn-save { background-color: var(--accent-green); width: 100%; padding: 0.8rem; font-size: 1rem; margin-top: 0.5rem; }
+.btn-save:hover { background-color: #059669; }
+
+.banner { padding: 1rem; border-radius: 6px; font-weight: bold; text-align: center; animation: pulse 2s infinite; }
+.banner.hidden { display: none; }
+.banner.visible { display: block; background-color: var(--alert-crimson); color: white; border: 1px solid #fff; }
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,195 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "orange", "value": 20 },
+              { "color": "green", "value": 35 }
+            ]
+          },
+          "unit": "percent"
+        }
+      },
+      "gridPos": { "h": 7, "w": 6, "x": 0, "y": 0 },
+      "id": 1,
+      "options": { "showThresholdLabels": false, "showThresholdMarkers": true },
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: -15m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\" and r[\"_field\"] == \"water_level\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Water Level",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "max": 45,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue", "value": null },
+              { "color": "green", "value": 16 },
+              { "color": "red", "value": 32 }
+            ]
+          },
+          "unit": "celsius"
+        }
+      },
+      "gridPos": { "h": 7, "w": 6, "x": 6, "y": 0 },
+      "id": 2,
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: -15m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\" and r[\"_field\"] == \"room_temp\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Ambient Temperature",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "max": 35,
+          "min": 5,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "blue", "value": null },
+              { "color": "green", "value": 15 },
+              { "color": "red", "value": 26 }
+            ]
+          },
+          "unit": "celsius"
+        }
+      },
+      "gridPos": { "h": 7, "w": 6, "x": 12, "y": 0 },
+      "id": 3,
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: -15m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\" and r[\"_field\"] == \"water_temp\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Water Temperature",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "max": 255,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "dark-blue", "value": null },
+              { "color": "yellow", "value": 1 },
+              { "color": "super-light-yellow", "value": 200 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 7, "w": 6, "x": 18, "y": 0 },
+      "id": 4,
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: -15m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\" and r[\"_field\"] == \"light_brightness\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "LED PWM Brightness (0-255)",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "options": { "OFF": { "color": "text", "index": 0 }, "ON": { "color": "green", "index": 1 } }, "type": "value" }
+          ]
+        }
+      },
+      "gridPos": { "h": 4, "w": 12, "x": 0, "y": 7 },
+      "id": 5,
+      "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: -15m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\" and r[\"_field\"] == \"pump_status\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "Pump Status",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "options": { "CRITICAL_LOW_WATER": { "color": "red", "index": 1 }, "NONE": { "color": "green", "index": 0 }, "OVERHEATING_ALARM": { "color": "red", "index": 2 } }, "type": "value" }
+          ]
+        }
+      },
+      "gridPos": { "h": 4, "w": 12, "x": 12, "y": 7 },
+      "id": 6,
+      "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: -15m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\" and r[\"_field\"] == \"alarm\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "title": "System Alarm",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "influxdb" },
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "drawStyle": "line", "fillOpacity": 15, "lineWidth": 2 }
+        }
+      },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 11 },
+      "id": 7,
+      "targets": [
+        {
+          "query": "from(bucket: \"hydro_tower\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"hydro_telemetry\")\n  |> filter(fn: (r) => r[\"_field\"] == \"room_temp\" or r[\"_field\"] == \"water_temp\" or r[\"_field\"] == \"water_level\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Hydro Tower History (Temperatures & Water Level)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["esp32", "hydroponics"],
+  "time": { "from": "now-1h", "to": "now" },
+  "title": "Hydro Tower Automation Monitor",
+  "uid": "hydro-tower-main"
+}

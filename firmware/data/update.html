@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydro Tower OTA & File Manager</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/ota.css">
+</head>
+<body>
+    <header>
+        <h1>Hydro Tower OTA & Flash Manager</h1>
+        <a href="/" class="back-link">&larr; Back to Dashboard</a>
+    </header>
+
+    <main class="container">
+        <!-- 1. OTA Binary Upload -->
+        <section class="card">
+            <h2>1. Firmware / Filesystem OTA (.bin)</h2>
+            <p class="ota-desc">Upload <code>.ino.bin</code> or <code>littlefs.bin</code> to overwrite the full partition.</p>
+            <form id="upload-form" method="POST" action="/do-update" enctype="multipart/form-data">
+                <div class="form-group ota-file-group">
+                    <input type="file" name="update" accept=".bin" required>
+                </div>
+                <p id="progress" class="ota-status">Klaar voor OTA update.</p>
+                <button type="submit" class="btn btn-save">Upload & Flash (.bin)</button>
+            </form>
+        </section>
+
+        <!-- 2. Individual File Upload -->
+        <section class="card">
+            <h2>2. Losse Bestanden Uploaden (HTML / CSS / JS / JSON)</h2>
+            <p class="ota-desc"><code>.css</code> wordt automatisch in <code>/css/</code> geplaatst en <code>.js</code> in <code>/js/</code>.</p>
+            <form id="file-upload-form">
+                <div class="form-group ota-file-group">
+                    <input type="file" id="single-file-input" required>
+                </div>
+                <p id="file-progress" class="ota-status">Selecteer een bestand om direct op te slaan.</p>
+                <button type="submit" class="btn btn-save">Bestand Opslaan in Flash</button>
+            </form>
+        </section>
+
+        <!-- 3. LittleFS File Explorer -->
+        <section class="card">
+            <h2>3. Bestanden op ESP32 (LittleFS)</h2>
+            <div class="table-wrapper">
+                <table class="file-table">
+                    <thead>
+                        <tr>
+                            <th>Bestandspad</th>
+                            <th>Grootte</th>
+                            <th>Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody id="file-list-body">
+                        <tr><td colspan="3">Laden...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/ota.js"></script>
+</body>
+</html>

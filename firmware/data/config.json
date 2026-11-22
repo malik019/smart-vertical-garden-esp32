@@ -1,0 +1,33 @@
+{
+  "wifi": {
+    "ssid": "",
+    "password": ""
+  },
+  "ntp": {
+    "server": "pool.ntp.org",
+    "gmt_offset": 3600,
+    "daylight_offset": 3600
+  },
+  "lighting": {
+    "start_time": "06:00",
+    "end_time": "22:00",
+    "fade_duration_min": 15
+  },
+  "irrigation": {
+    "on_duration_min": 5,
+    "interval_min": 45
+  },
+  "thresholds": {
+    "min_water_level_pct": 20.0,
+    "max_water_temp_c": 26.0,
+    "max_room_temp_c": 35.0
+  },
+  "mqtt": {
+    "broker": "192.168.129.11",
+    "port": 1883,
+    "user": "cobalt",
+    "password": "testmqtt",
+    "prefix": "hydro_tower/001",
+    "interval_sec": 30
+  }
+}

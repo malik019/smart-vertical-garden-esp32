@@ -1,0 +1,9 @@
+**/build/
+*.bin
+*.elf
+hardware-backups/
+*~*.lck
+*.kicad_prl
+*-bak
+.venv/
+.DS_Store
